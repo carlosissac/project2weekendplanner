@@ -1,0 +1,8 @@
+#body-area {
+    background: #D9D9D9;
+    font-family: 'Ubuntu', sans-serif;
+    display: grid;
+    overflow: auto;
+    object-fit: cover;
+    overflow-y: scroll;
+}

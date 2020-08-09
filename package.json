@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "lint": "eslint \"./**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server",
+    "dev": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,12 @@
   },
   "homepage": "https://github.com/carlosissac/project2weekendplanner#readme",
   "dependencies": {
-    "eslint": "^7.6.0"
+    "eslint": "^7.6.0",
+    "express": "^4.17.1",
+    "moment": "^2.27.0",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

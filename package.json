@@ -1,0 +1,23 @@
+{
+  "name": "project2weekendplanner",
+  "version": "1.0.0",
+  "description": "project2weekendplanner",
+  "main": "server.js",
+  "scripts": {
+    "lint": "eslint \"./**/*.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlosissac/project2weekendplanner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carlosissac/project2weekendplanner/issues"
+  },
+  "homepage": "https://github.com/carlosissac/project2weekendplanner#readme",
+  "dependencies": {
+    "eslint": "^7.6.0"
+  }
+}

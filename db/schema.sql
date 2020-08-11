@@ -1,0 +1,36 @@
+DROP DATABASE IF EXISTS weekendPlanner;
+
+CREATE DATABASE weekendPlanner;
+
+USE weekendPlanner;
+
+CREATE TABLE User (
+ID INT NOT NULL AUTO_INCREMENT,
+username VARCHAR (30),
+email VARCHAR (30),
+nickname VARCHAR (30),
+created DATE,
+PRIMARY KEY (ID)
+)
+;
+CREATE TABLE Events (
+ID INT AUTO_INCREMENT NOT NULL,
+eventID INT,
+eventName VARCHAR (254),
+place VARCHAR (254),
+type VARCHAR (30),
+organizerName VARCHAR (254),
+startTime DATETIME,
+endTime DATETIME,
+PRIMARY KEY (ID)
+);
+CREATE TABLE Schedule (
+ID INT NOT NULL AUTO_INCREMENT,
+username VARCHAR (50) ,
+eventID INTEGER,
+userNote VARCHAR (254),
+outdated VARCHAR (5) ,
+created DATETIME,
+PRIMARY KEY (ID)
+)
+;

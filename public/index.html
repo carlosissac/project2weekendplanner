@@ -1,14 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weekend Planner</title>
     <!-- CSS LINKAGE -->
     <link rel="stylesheet" href="./css/style.css">
+    <title> Weekend Planner</title>
 </head>
-<body id="body-area">
-    <h1>Weekend Planner App</h1>
-    <h4>¡¡¡¡Hola Mundo!!!!</h4>
+
+<body class="bg-green-300">
+
+
+    <div class="container mx-auto">
+        Weekend Planner Hola Mundo!
+
+        <div class="valign-wrapper row signin-box">
+            <div class="col card hoverable s10 offset-s1 m8 offset-m2 l4 offset-l3 signin-card">
+                <form id="signin" name="signin" method="post" action="/signin">
+                    <div class="card-content">
+                        <span class="card-title center">Log In</span>
+        
+                        <div class="row">
+        
+                            <div>
+                                <label class="auth-form" for="credentials[email]">Email</label>
+                                <input name="credentials[email]" id="credentials[email]" type="email" placeholder="Email" required></div>
+                        </div>
+                    </div>
+        
+                    <div class="card-action center-align">
+                        <div class="input-field col s12 center-align">
+                            <button type="submit" class="btn waves-effect waves-light teal lighten-2 col s12 center">Logn In</button>
+                        </div>
+                        <div class="input-field col s12 center-align">
+                            <p class="margin center medium-small sign-up">First time here? <a href="register.html">Sign Up!</a></p>
+                        </div>               
+                    </div>
+                </form>
+            </div>
+        </div>
 </body>
+
 </html>

@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(logger);
+app.use('/api/users', require('./routes/api/users'));
 app.use(pages);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

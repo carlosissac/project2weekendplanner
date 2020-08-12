@@ -1,29 +1,27 @@
-const orm = require('../config/orm');
-
+const ormUsers = require('../config/ormUsers');
 
 const User = {
-    all: function(cb) {
-        orm.all('User', function(res) {
-            cb(res);
+    listUsersTable: cb => {
+        ormUsers.listUsersTable(res => {
+            return cb(res);
         });
     },
-    // The variables cols and vals are arrays.
-    create: function(cols, vals, cb) {
-        orm.create('User', cols, vals, function(res) {
-            cb(res);
+    listSingleUserByUserID: (userID, cb) => {
+        ormUsers.listSingleUserByUserID(userID, res => {
+            return cb(res);
         });
     },
-    update: function(objColVals, condition, cb) {
-        orm.update('User', objColVals, condition, function(res) {
-            cb(res);
+    registerUser: (userName, userEmail, userNickname, cb) => {
+        ormUsers.registerUser(userName, userEmail, userNickname, res => {
+            return cb(res);
         });
     },
-    delete: function(condition, cb) {
-        orm.delete('User', condition, function(res) {
-            cb(res);
+    updateUser: (userID, userName, userEmail, userNickname, cb) => {
+        ormUsers.updateUser(userID, userName, userEmail, userNickname, res => {
+            return cb(res);
         });
-    }
+    },
 };
 
-// Export the database functions for the controller (Controller.js).
+
 module.exports = User;

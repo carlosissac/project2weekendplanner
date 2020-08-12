@@ -5,32 +5,31 @@ CREATE DATABASE weekendPlanner;
 USE weekendPlanner;
 
 CREATE TABLE User (
-ID INT NOT NULL AUTO_INCREMENT,
+userID INT NOT NULL AUTO_INCREMENT,
 username VARCHAR (30),
-email VARCHAR (30),
-nickname VARCHAR (30),
-created DATE,
-PRIMARY KEY (ID)
-)
-;
-CREATE TABLE Events (
-ID INT AUTO_INCREMENT NOT NULL,
-eventID INT,
-eventName VARCHAR (254),
-place VARCHAR (254),
-type VARCHAR (30),
-organizerName VARCHAR (254),
-startTime DATETIME,
-endTime DATETIME,
-PRIMARY KEY (ID)
+userEmail VARCHAR (30),
+userNickname VARCHAR (30),
+userCreated DATETIME NOT NULL DEFAULT NOW(),
+PRIMARY KEY (userID)
 );
+
+CREATE TABLE Events (
+eventID INT AUTO_INCREMENT NOT NULL,
+eventName VARCHAR (254),
+eventPlace VARCHAR (254),
+eventType VARCHAR (30),
+eventOrganizer VARCHAR (254),
+eventTimeStart DATETIME,
+eventTimeEnd DATETIME,
+PRIMARY KEY (eventID)
+);
+
 CREATE TABLE Schedule (
-ID INT NOT NULL AUTO_INCREMENT,
-username VARCHAR (50) ,
+scheduleID INT NOT NULL AUTO_INCREMENT,
+userID INTEGER,
 eventID INTEGER,
-userNote VARCHAR (254),
-outdated VARCHAR (5) ,
-created DATETIME,
-PRIMARY KEY (ID)
-)
-;
+scheduleNote VARCHAR (254),
+scheduleOutdated BOOLEAN DEFAULT false,
+scheduleCreated DATETIME NOT NULL DEFAULT NOW(),
+PRIMARY KEY (scheduleID)
+);

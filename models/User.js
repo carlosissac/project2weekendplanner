@@ -1,27 +1,34 @@
-const ormUsers = require('../config/ormUsers');
+module.exports = (sequelize, DataTypes) => {
+    var User = sequelize.define('User', {
+        UserID: {
+            type: DataTypes.INTEGER(11),
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            onDelete: 'cascade'
+        },
+        UserName: {
+            type: DataTypes.STRING(35),
+            allowNull: false,
+        },
+        UserEmail: {
+            type: DataTypes.STRING(35),
+            allowNull: false,
+            unique: true
+        },
+        UserNickname: {
+            type: DataTypes.STRING(35),
+            allowNull: false,
+            unique: true
+        },
+        UserCreated: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.fn('now')
+        }
+    }, {
+        timestamps: false
+    });
 
-const User = {
-    listUsersTable: cb => {
-        ormUsers.listUsersTable(res => {
-            return cb(res);
-        });
-    },
-    listSingleUserByUserID: (userID, cb) => {
-        ormUsers.listSingleUserByUserID(userID, res => {
-            return cb(res);
-        });
-    },
-    registerUser: (userName, userEmail, userNickname, cb) => {
-        ormUsers.registerUser(userName, userEmail, userNickname, res => {
-            return cb(res);
-        });
-    },
-    updateUser: (userID, userName, userEmail, userNickname, cb) => {
-        ormUsers.updateUser(userID, userName, userEmail, userNickname, res => {
-            return cb(res);
-        });
-    },
+    return User;
 };
-
-
-module.exports = User;

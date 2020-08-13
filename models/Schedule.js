@@ -1,29 +1,51 @@
-const orm = require('../config/orm');
+module.exports = (sequelize, DataTypes) => {
+    var Schedule = sequelize.define('Schedule', {
+        ScheduleID: {
+            type: DataTypes.INTEGER(11),
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        /*UserID: {
+            type: DataTypes.INTEGER(11),
+            allowNull: false
+        },*/
+        /*EventID: {
+            type: DataTypes.INTEGER(11),
+            allowNull: false
+        },*/
+        ScheduleNote: {
+            type: DataTypes.STRING(300),
+            allowNull: false
+        },
+        ScheduleOutdated: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
+        ScheduleCreated: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: sequelize.fn('now')
+        }
+    }, {
+        timestamps: false
+    });
 
+    Schedule.associate = models => {
+        Schedule.belongsTo(models.User, {
+            foreignKey: {
+                name: 'UserID',
+                allowNull: false
+            }
+        });
+        Schedule.belongsTo(models.Event, {
+            foreignKey: {
+                name: 'EventID',
+                allowNull: false
+            }
+        });
+    };
 
-const Schedule = {
-    all: function(cb) {
-        orm.all('Schedule', function(res) {
-            cb(res);
-        });
-    },
-    // The variables cols and vals are arrays.
-    create: function(cols, vals, cb) {
-        orm.create('Schedule', cols, vals, function(res) {
-            cb(res);
-        });
-    },
-    update: function(objColVals, condition, cb) {
-        orm.update('Schedule', objColVals, condition, function(res) {
-            cb(res);
-        });
-    },
-    delete: function(condition, cb) {
-        orm.delete('Schedule', condition, function(res) {
-            cb(res);
-        });
-    }
+    return Schedule;
 };
-
-// Export the database functions for the controller (Controller.js).
-module.exports = Schedule;

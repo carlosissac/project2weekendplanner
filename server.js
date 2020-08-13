@@ -1,15 +1,25 @@
-const express = require('express');
+var express = require('express');
 const logger = require('./middleware/logger');
 const pages = require('./routes/public/pages');
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+var app = express();
+var PORT = process.env.PORT || 3000;
 
+var db = require('./models');
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+
 
 app.use(logger);
-app.use('/api/users', require('./routes/api/users'));
+app.use('/api/user', require('./routes/api/user'));
+app.use('/api/event', require('./routes/api/event'));
 app.use(pages);
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+db
+    .sequelize
+    .sync({ force: false }).then( () => {
+        app.listen(PORT, () => {
+            console.log(`App listening on: http://localhost:${PORT}`);
+        });
+    });

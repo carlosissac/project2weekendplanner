@@ -4,8 +4,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER(11),
             allowNull: false,
             autoIncrement: true,
-            primaryKey: true,
-            onDelete: 'cascade'
+            primaryKey: true
         },
         UserName: {
             type: DataTypes.STRING(35),
@@ -13,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         UserEmail: {
             type: DataTypes.STRING(35),
-            allowNull: false,
-            unique: true
+            allowNull: false
+            //unique: true
         },
         UserNickname: {
             type: DataTypes.STRING(35),
-            allowNull: false,
-            unique: true
+            allowNull: false
+            //unique: true
         },
         UserCreated: {
             type: DataTypes.DATE,
@@ -29,6 +28,17 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         timestamps: false
     });
+
+    User.associate = models => {
+        User.hasMany(models.Schedule, {
+            onDelete: 'CASCADE',
+            foreignKey: {
+                name: 'UserID',
+                allowNull: false
+            },
+            hooks: true
+        });
+    };
 
     return User;
 };

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,43 +8,27 @@
     <link rel="stylesheet" href="./css/style.css">
     <title> Weekend Planner</title>
 </head>
-
 <body class="bg-green-300">
-    <!-- navbar, will differ on some pages  -->
     <nav class="flex items-center justify-between flex-wrap bg-green-900 p-6">
-        <div class="flex items-center flex-shrink-0 text-white ml-24 mr-6">
-            <span class="font-bold text-3xl"> Weekend Planner </span>
+        <div class="flex items-center flex-shrink-0 text-white mr-6">
+            <span class="font-bold text-xl"> Weekend Planner </span>
         </div>
-
-    </nav>
-
-
-    <!-- MAIN PAGE, login or register from here  -->
-    <div class="container mx-auto mt-12 ">
-
-        <form class="md:w-2/3 h-12 bg-white shadow-md rounded px-8 pt-8 pb-8 mb-8 mt-8">
-            <input name="credentials[email]" id="credentials[email]" type="email" placeholder="Your Email Here" required>
-        </form>
-
-        <div class="row">
-            <a href="plans.html">
-                <button class=" bg-red-600 shadow-md rounded hover:bg-red-400 text-white font-bold p-4 "> LOG IN
-            </a>
-            </button>
-
-                <a href="register.html">
-                    <button class="bg-blue-600 shadow-md rounded hover:bg-blue-400 text-white font-bold p-4"> REGISTER
-            </a>
-            </button>
+        <div class="w-full flex flex-wrap">
+            <div class="w-full md:w-1/2 flex flex-col">
+                <div class="flex flex-col justify-center md:justify-start my-auto pt-8 md:pt-0 px-8 md:px-24 lg:px-32">
+                    <p class="text-center text-3xl">Welcome.</p>
+                    <form class="flex flex-col pt-3 md:pt-8" onsubmit="event.preventDefault();">
+                        <div class="flex flex-col pt-4">
+                            <label for="email" class="text-lg">Email</label>
+                            <input type="email" id="email" placeholder="your@email.com" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+                        <input type="submit" value="Log In" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">
+                    </form>
+                    <div class="text-center pt-12 pb-12">
+                        <p>Don't have an account? <a href="register.html" class="underline font-semibold">Register here.</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-
-
-
-
-    </div>
-
 </body>
-
 </html>

@@ -4,8 +4,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER(11),
             allowNull: false,
             autoIncrement: true,
-            primaryKey: true,
-            onDelete: 'cascade'
+            primaryKey: true
         },
         EventName: {
             type: DataTypes.STRING(254),
@@ -39,5 +38,17 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         timestamps: false
     });
+
+    Event.associate = models => {
+        Event.hasMany(models.Schedule, {
+            onDelete: 'CASCADE',
+            foreignKey: {
+                name: 'EventID',
+                allowNull: false
+            },
+            hooks: true
+        });
+    };
+
     return Event;
 };

@@ -34,16 +34,21 @@ module.exports = (sequelize, DataTypes) => {
 
     Schedule.associate = models => {
         Schedule.belongsTo(models.User, {
+            onDelete: 'CASCADE',
             foreignKey: {
                 name: 'UserID',
                 allowNull: false
-            }
+            },
+            hooks: true
         });
         Schedule.belongsTo(models.Event, {
+            onDelete: 'CASCADE',
+            name: 'EventID',
             foreignKey: {
                 name: 'EventID',
                 allowNull: false
-            }
+            },
+            hooks: true
         });
     };
 

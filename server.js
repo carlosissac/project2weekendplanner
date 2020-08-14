@@ -17,9 +17,13 @@ app.use('/api/event', require('./routes/api/event'));
 app.use(pages);
 
 db
-    .sequelize
-    .sync({ force: false }).then( () => {
-        app.listen(PORT, () => {
-            console.log(`App listening on: http://localhost:${PORT}`);
-        });
+    .sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true })
+    .then(() => {
+        db
+            .sequelize.sync({ force: false })
+            .then(() => {
+                app.listen(PORT, () => {
+                    console.log(`App listening on: http://localhost:${PORT}`);
+                });
+            });
     });

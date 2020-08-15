@@ -8,33 +8,33 @@ EventJoiSchema.prototype.getID = function() {
     return this.type;
 };
 
-EventJoiSchema.prototype.getSingleMethod = function() {
+EventJoiSchema.prototype.getSingleEventMethod = function() {
     const schema = {
         EventID: Joi.string().trim().regex(/^[0-9]+$/).required()
     };
     return schema;
 };
 
-EventJoiSchema.prototype.postMethod = function() {
+EventJoiSchema.prototype.postEventMethod = function() {
     const schema = {
+        EventCategory: Joi.string().required(),
         EventName: Joi.string().required(),
-        EventPlace:  Joi.string().required(),
-        EventType: Joi.string().required(),
-        EventOrganizer: Joi.string().required(),
-        EventTimeStart: Joi.date().required(),
-        EventTimeEnd: Joi.date().required()
+        EventDate: Joi.string().required(),
+        EventTimeStart: Joi.any(),
+        EventTimeEnd: Joi.any(),
+        EventPlace: Joi.string().required()
     };
     return schema;
 };
 
-EventJoiSchema.prototype.putMethod = function() {
+EventJoiSchema.prototype.putEventMethod = function() {
     const schema = {
         EventID: Joi.string().trim().regex(/^[0-9]+$/).required()
     };
     return schema;
 };
 
-EventJoiSchema.prototype.deleteMethod = function() {
+EventJoiSchema.prototype.deleteEventMethod = function() {
     const schema = {
         EventID: Joi.string().trim().regex(/^[0-9]+$/).required()
     };

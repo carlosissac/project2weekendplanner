@@ -21,6 +21,15 @@ app.use('/api/event', event);
 
 app.use(pages);
 
+//HEROKKU VERSION
+/*db.sequelize.sync({force:true}).then(function(){
+  app.listen(PORT, function(){
+    console.log("Listening on port %s", PORT);
+  });
+});*/
+
+
+//DEV VERSIOM
 db
     .sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true })
     .then(() => {

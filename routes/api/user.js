@@ -12,11 +12,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/single/:UserID', (req, res) => {
-    console.log('ssssinggggglleeee');
-    console.log(req.params);
-    console.log(!!sch.getSingleUserMethod);
     const { error } = Joi.validate(req.params, sch.getSingleUserMethod());
-    console.log('error', error);
     if(error) {
         res.status(400).send('UserID Invalid');
         return;
@@ -41,7 +37,7 @@ router.get('/single/:UserID', (req, res) => {
 });
 
 router.get('/email/:UserEmail', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.getEmailMethod());
+    const { error } = Joi.validate(req.params, sch.getUserEmailMethod());
     if(error) {
         res.status(400).send('UserEmail Invalid');
         return;
@@ -66,7 +62,7 @@ router.get('/email/:UserEmail', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const { error } = Joi.validate(req.body, sch.postMethod());
+    const { error } = Joi.validate(req.body, sch.postUserMethod());
     if(error) {
         res.status(400).send(error.details[0].message);
         return;
@@ -91,7 +87,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:UserID', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.putMethod());
+    const { error } = Joi.validate(req.params, sch.putUserMethod());
     if(error) {
         res.status(400).send(error);
         return;
@@ -118,7 +114,7 @@ router.put('/:UserID', (req, res) => {
 });
 
 router.delete('/:UserID', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.deleteMethod());
+    const { error } = Joi.validate(req.params, sch.deleteUserMethod());
     if(error) {
         res.status(400).send(error);
         return;

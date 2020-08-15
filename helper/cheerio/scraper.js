@@ -61,4 +61,13 @@ Scraper.prototype.scrapePage = function(pageNumber) {
     });
 };
 
-module.exports = { Scraper };
+
+scp = new Scraper();
+scp.scrapePage(1);
+scp.scrapePage(2);
+scp.scrapePage(3);
+scp.scrapePage(4);
+
+
+
+//module.exports = { Scraper };

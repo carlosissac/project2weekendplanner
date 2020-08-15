@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/single/:EventID', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.getSingleMethod());
+    const { error } = Joi.validate(req.params, sch.getSingleEventMethod());
     if(error) {
         res.status(400).send('EventID Invalid');
         return;
@@ -37,7 +37,7 @@ router.get('/single/:EventID', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const { error } = Joi.validate(req.body, sch.postMethod());
+    const { error } = Joi.validate(req.body, sch.postEventMethod());
     if(error) {
         res.status(400).send(error.details[0].message);
         return;
@@ -66,8 +66,8 @@ router.post('/', (req, res) => {
     }
 });
 
-router.put('/:Event', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.putMethod());
+router.put('/:EventID', (req, res) => {
+    const { error } = Joi.validate(req.params, sch.putEventMethod());
     if(error) {
         res.status(400).send(error);
         return;
@@ -93,8 +93,8 @@ router.put('/:Event', (req, res) => {
     }
 });
 
-router.delete('/:Event', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.deleteMethod());
+router.delete('/:EventID', (req, res) => {
+    const { error } = Joi.validate(req.params, sch.deleteEventMethod());
     if(error) {
         res.status(400).send(error);
         return;

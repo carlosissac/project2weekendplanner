@@ -5,6 +5,7 @@ const router = new express.Router();
 let db = require('../../models');
 const sch = new EventJoiSchema();
 
+//FIND ALL EVENTS
 router.get('/', (req, res) => {
     db.Event.findAll({raw: true}).then(ret => {
         res.json(ret);

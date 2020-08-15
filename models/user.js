@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             primaryKey: true
         },
-        UserName: {
+        /*UserName: {
             type: DataTypes.STRING(35),
             allowNull: false,
         },
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(35),
             allowNull: false
             //unique: true
-        },
+        },*/
         UserNickname: {
             type: DataTypes.STRING(35),
             allowNull: false

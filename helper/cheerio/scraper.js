@@ -6,7 +6,7 @@ const Scraper = function() {
     this.EventCategory = [];
     this.EventName = [];
     this.EventDate = [];
-    this.EventTime = [];
+    this.EventTimeStart = [];
     this.EventPlace = [];
 };
 
@@ -37,19 +37,19 @@ Scraper.prototype.scrapePage = function(pageNumber) {
             //console.log(this.EventName);
             console.log(this.EventName.length);
 
-            //Event Day
+            //Event Date
             $('.event-details').each((i, el) => {
                 this.EventDate[i] = $(el).find('.event-date').text().replace(/\s\s+/g, '');
             });
             //console.log(this.EventDate);
             console.log(this.EventDate.length);
 
-            //Event Time
+            //Event Time Start
             $('.event-details').each((i, el) => {
-                this.EventTime[i] = $(el).find('.event-time').text().replace(/\s\s+/g, '');
+                this.EventTimeStart[i] = $(el).find('.event-time').text().replace(/\s\s+/g, '');
             });
             //console.log(this.EventTime);
-            console.log(this.EventTime.length);
+            console.log(this.EventTimeStart.length);
 
             //Event Place
             $('.location-column').each((i, el) => {
@@ -61,10 +61,4 @@ Scraper.prototype.scrapePage = function(pageNumber) {
     });
 };
 
-const scp = new Scraper();
-scp.scrapePage(1);
-scp.scrapePage(2);
-scp.scrapePage(3);
-scp.scrapePage(4);
-scp.scrapePage(5);
-scp.scrapePage(6);
+module.exports = { Scraper };

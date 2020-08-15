@@ -8,9 +8,9 @@ UserJoiSchema.prototype.getID = function() {
     return this.type;
 };
 
-UserJoiSchema.prototype.getSingleMethod = function() {
+UserJoiSchema.prototype.getSingleUserMethod = function() {
     const schema = {
-        UserID: Joi.string().trim().regex(/^[0-9]+$/).required()
+        UserID: Joi.string()//trim().regex(/^[0-9]+$/).required()
     };
     return schema;
 };

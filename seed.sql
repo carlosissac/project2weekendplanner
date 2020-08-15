@@ -7,14 +7,14 @@ VALUES ('Mo Abdi', 'mo@mo.me', 'moabdi');
 INSERT INTO weekendPlanner.Users (UserName, userEmail, userNickname)
 VALUES ('Karyn Clarke', 'karyn@karyn.me', 'karynclarke');
 
-INSERT INTO weekendPlanner.Events (EventName, EventPlace, EventType, EventOrganizer, EventTimeStart, EventTimeEnd)
-VALUES ('SummerParty', 'Food Truck Central', 'Food', 'TerriJ', '2020/08/10 13:00:00', '2020/08/10 14:00:00');
-INSERT INTO weekendPlanner.Events (EventName, EventPlace, EventType, EventOrganizer, EventTimeStart, EventTimeEnd) 
-VALUES ('Fatal State', 'Black Water', 'Music', 'Black and Green Collective', '2020/08/15 20:00:00', '2020/08/10 23:00:00');
-INSERT INTO weekendPlanner.Events (EventName, EventPlace, EventType, EventOrganizer, EventTimeStart, EventTimeEnd)
-VALUES ('2001 Space Odyssey', 'Hollywood Theater', 'Movies', 'Movie Madness', '2020/08/15 15:00:00', '2020/08/10 18:00:00');
-INSERT INTO weekendPlanner.Events (EventName, EventPlace, EventType, EventOrganizer, EventTimeStart, EventTimeEnd)
-VALUES ('Eels', 'Mississippi Studios', 'Music', 'Harry Thrasher Productions', '2020/08/17 20:00:00', '2020/08/17 23:00:00');
+INSERT INTO weekendPlanner.Events (EventCategory, EventName, EventDate, EventTimeStart, EventTimeEnd, EventPlace)
+VALUES ('Livestreamed', 'Jim Brickman', 'Multiple dates between Aug 14 - Aug 21', '4:30 PM', '5:30 PM', 'Online');
+INSERT INTO weekendPlanner.Events (EventCategory, EventName, EventDate, EventTimeStart, EventTimeEnd, EventPlace) 
+VALUES ('Resistance & Solidarity', 'Black Lives Matter Car Caravan', 'Wed & Fri', '', '9:30 PM', 'PCC Cascade Campus');
+INSERT INTO weekendPlanner.Events (EventCategory, EventName, EventDate, EventTimeStart, EventTimeEnd, EventPlace)
+VALUES ('In-Person', 'The Hot Minute, The Bad Table', 'Fri, starting Fri Aug 14', '6:00 PM', '+30 min', 'Alotta Wood Fired Pizza');
+INSERT INTO weekendPlanner.Events (EventCategory, EventName, EventDate, EventTimeStart, EventTimeEnd, EventPlace)
+VALUES ('Community', 'Beaverton Virtual Night Market 2020', 'Every day, from Aug 14 - Aug 15', '7:00 PM', '+2 Hours', 'Online');
 
 INSERT INTO weekendPlanner.Schedules (UserID, EventID, ScheduleNote)
 VALUES (1, 4, 'bring earplugs');

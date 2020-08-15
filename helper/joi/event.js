@@ -17,12 +17,12 @@ EventJoiSchema.prototype.getSingleMethod = function() {
 
 EventJoiSchema.prototype.postMethod = function() {
     const schema = {
+        EventCategory: Joi.string().required(),
         EventName: Joi.string().required(),
-        EventPlace:  Joi.string().required(),
-        EventType: Joi.string().required(),
-        EventOrganizer: Joi.string().required(),
-        EventTimeStart: Joi.date().required(),
-        EventTimeEnd: Joi.date().required()
+        EventDate: Joi.string().required(),
+        EventTimeStart: Joi.any(),
+        EventTimeEnd: Joi.any(),
+        EventPlace: Joi.string().required()
     };
     return schema;
 };

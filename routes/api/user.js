@@ -1,9 +1,9 @@
 const Joi = require('joi');
 const { UserJoiSchema } = require('../../helper/joi/user');
 const express = require('express');
-const router = express.Router();
+const router = new express.Router();
 let db = require('../../models');
-sch = new UserJoiSchema();
+const sch = new UserJoiSchema();
 
 router.get('/', (req, res) => {
     db.User.findAll({raw: true}).then(ret => {
@@ -12,7 +12,11 @@ router.get('/', (req, res) => {
 });
 
 router.get('/single/:UserID', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.getSingleMethod());
+    console.log('ssssinggggglleeee');
+    console.log(req.params);
+    console.log(!!sch.getSingleUserMethod);
+    const { error } = Joi.validate(req.params, sch.getSingleUserMethod());
+    console.log('error', error);
     if(error) {
         res.status(400).send('UserID Invalid');
         return;

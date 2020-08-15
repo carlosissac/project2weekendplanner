@@ -1,40 +1,64 @@
 const Joi = require('joi');
 const { EventJoiSchema } = require('../../helper/joi/event');
 const express = require('express');
-const router = express.Router();
+const router = new express.Router();
 let db = require('../../models');
-sch = new EventJoiSchema();
+const sch = new EventJoiSchema();
 
 router.get('/', (req, res) => {
     db.Event.findAll({raw: true}).then(ret => {
-        console.log(ret);
         res.json(ret);
     });
 });
 
+router.get('/single/:EventID', (req, res) => {
+    const { error } = Joi.validate(req.params, sch.getSingleEventMethod());
+    if(error) {
+        res.status(400).send('EventID Invalid');
+        return;
+    } else {
+        db.Event.findOne({
+            raw: true,
+            where: { EventID: req.params.EventID }
+        }).then(ret => {
+            if(!ret) {
+                res.status(404).send('Event Not Found');
+                return;
+            } else {
+                const msg = {
+                    'msg': 'Event Found',
+                    'user': ret
+                };
+                res.json(msg);
+                return;
+            }
+        });
+    }
+});
+
 router.post('/', (req, res) => {
-    const { error } = Joi.validate(req.body, sch.postMethod());
+    const { error } = Joi.validate(req.body, sch.postEventMethod());
     if(error) {
         res.status(400).send(error.details[0].message);
         return;
     } else {
         db.Event.create({
             raw: true,
+            EventCategory: req.body.EventCategory,
             EventName: req.body.EventName,
-            EventPlace: req.body.EventPlace,
-            EventType: req.body.EventType,
-            EventOrganizer: req.body.EventOrganizer,
+            EventDate: req.body.EventDate,
             EventTimeStart: req.body.EventTimeStart,
-            EventTimeEnd: req.body.EventTimeEnd
+            EventTimeEnd: req.body.EventTimeEnd,
+            EventPlace: req.body.EventPlace
         }).then(ret => {
             const msg = {
                 'msg': 'Post Successful',
-                'EventName': ret.dataValues.EventName,
-                'EventPlace': req.body.EventPlace,
-                'EventType': req.body.EventType,
-                'EventOrganizer': req.body.EventOrganizer,
+                'EventCategory': ret.dataValues.EventCategory,
+                'EventName': req.body.EventName,
+                'EventDate': req.body.EventDate,
                 'EventTimeStart': req.body.EventTimeStart,
-                'EventTimeEnd': req.body.EventTimeEnd
+                'EventTimeEnd': req.body.EventTimeEnd,
+                'EventPlace': req.body.EventPlace,
             };
             res.json(msg);
             return;
@@ -42,8 +66,8 @@ router.post('/', (req, res) => {
     }
 });
 
-router.put('/:Event', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.putMethod());
+router.put('/:EventID', (req, res) => {
+    const { error } = Joi.validate(req.params, sch.putEventMethod());
     if(error) {
         res.status(400).send(error);
         return;
@@ -69,8 +93,8 @@ router.put('/:Event', (req, res) => {
     }
 });
 
-router.delete('/:Event', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.deleteMethod());
+router.delete('/:EventID', (req, res) => {
+    const { error } = Joi.validate(req.params, sch.deleteEventMethod());
     if(error) {
         res.status(400).send(error);
         return;
@@ -92,48 +116,5 @@ router.delete('/:Event', (req, res) => {
         });
     }
 });
-
-
-/*router.get('/:EventID', (req, res) => {
-    db.Event.findOne({
-        raw: true,
-        where: { EventID: req.params.EventID }
-    }).then(ret => {
-        console.log(ret);
-        res.json(ret);
-    });
-});*/
-
-/*router.post('/', (req, res) => {
-    db.Event.create({
-        raw: true,
-        EventName: req.body.EventName,
-        EventEmail: req.body.EventEmail,
-        EventNickname: req.body.EventNickname
-    }).then(ret => {
-        console.log(ret);
-        res.json(ret);
-    });
-});
-
-router.put('/:EventID', (req, res) => {
-    db.Event.update(
-        req.body, {
-            raw: true,
-            where: { EventID: req.params.EventID }
-        }).then(ret => {
-        console.log(ret);
-        res.json(ret);
-    });
-});*/
-
-/*router.delete('/:EventID', (req, res) => {
-    db.User.destroy({
-        where: { UserID: req.params.EventID }
-    }).then(ret => {
-        console.log(ret);
-        res.json(ret);
-    });
-});*/
 
 module.exports = router;

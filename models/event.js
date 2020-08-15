@@ -6,29 +6,29 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             primaryKey: true
         },
-        EventName: {
+        EventCategory: {
             type: DataTypes.STRING(254),
             allowNull: false,
         },
-        EventPlace: {
+        EventName: {
             type: DataTypes.STRING(254),
             allowNull: false
         },
-        EventType: {
-            type: DataTypes.STRING(35),
-            allowNull: false
-        },
-        EventOrganizer: {
-            type: DataTypes.STRING(35),
+        EventDate: {
+            type: DataTypes.STRING(254),
             allowNull: false
         },
         EventTimeStart: {
-            type: DataTypes.DATE,
-            allowNull: false
+            type: DataTypes.STRING(35),
+            allowNull: true
         },
         EventTimeEnd: {
-            type: DataTypes.DATE,
-            allowNull: false
+            type: DataTypes.STRING(254),
+            allowNull: true
+        },
+        EventPlace: {
+            type: DataTypes.STRING(254),
+            allowNull: true
         },
         EventCreated: {
             type: DataTypes.DATE,

@@ -6,14 +6,6 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             primaryKey: true
         },
-        /*UserID: {
-            type: DataTypes.INTEGER(11),
-            allowNull: false
-        },*/
-        /*EventID: {
-            type: DataTypes.INTEGER(11),
-            allowNull: false
-        },*/
         ScheduleNote: {
             type: DataTypes.STRING(300),
             allowNull: false

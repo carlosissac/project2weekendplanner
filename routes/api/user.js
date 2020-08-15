@@ -1,9 +1,9 @@
 const Joi = require('joi');
 const { UserJoiSchema } = require('../../helper/joi/user');
 const express = require('express');
-const router = express.Router();
+const router = new express.Router();
 let db = require('../../models');
-sch = new UserJoiSchema();
+const sch = new UserJoiSchema();
 
 router.get('/', (req, res) => {
     db.User.findAll({raw: true}).then(ret => {
@@ -11,10 +11,10 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:UserID', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.getSingleMethod());
+router.get('/single/:UserID', (req, res) => {
+    const { error } = Joi.validate(req.params, sch.getSingleUserMethod());
     if(error) {
-        res.status(400).send(error);
+        res.status(400).send('UserID Invalid');
         return;
     } else {
         db.User.findOne({
@@ -22,7 +22,7 @@ router.get('/:UserID', (req, res) => {
             where: { UserID: req.params.UserID }
         }).then(ret => {
             if(!ret) {
-                res.status(404).send('Update unsuccessful - No change in updated field or Record Not Found');
+                res.status(404).send('User Not Found');
                 return;
             } else {
                 const msg = {
@@ -36,8 +36,33 @@ router.get('/:UserID', (req, res) => {
     }
 });
 
+router.get('/email/:UserEmail', (req, res) => {
+    const { error } = Joi.validate(req.params, sch.getUserEmailMethod());
+    if(error) {
+        res.status(400).send('UserEmail Invalid');
+        return;
+    } else {
+        db.User.findOne({
+            raw: true,
+            where: { UserEmail: req.params.UserEmail }
+        }).then(ret => {
+            if(!ret) {
+                res.status(404).send('Email Not Found');
+                return;
+            } else {
+                const msg = {
+                    'msg': 'Email Found',
+                    'user': ret
+                };
+                res.json(msg);
+                return;
+            }
+        });
+    }
+});
+
 router.post('/', (req, res) => {
-    const { error } = Joi.validate(req.body, sch.postMethod());
+    const { error } = Joi.validate(req.body, sch.postUserMethod());
     if(error) {
         res.status(400).send(error.details[0].message);
         return;
@@ -62,7 +87,7 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:UserID', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.putMethod());
+    const { error } = Joi.validate(req.params, sch.putUserMethod());
     if(error) {
         res.status(400).send(error);
         return;
@@ -89,7 +114,7 @@ router.put('/:UserID', (req, res) => {
 });
 
 router.delete('/:UserID', (req, res) => {
-    const { error } = Joi.validate(req.params, sch.deleteMethod());
+    const { error } = Joi.validate(req.params, sch.deleteUserMethod());
     if(error) {
         res.status(400).send(error);
         return;

@@ -15,10 +15,17 @@ UserJoiSchema.prototype.getSingleMethod = function() {
     return schema;
 };
 
+UserJoiSchema.prototype.getEmailMethod = function() {
+    const schema = {
+        UserEmail: Joi.string().email().required()
+    };
+    return schema;
+};
+
 UserJoiSchema.prototype.postMethod = function() {
     const schema = {
         UserName: Joi.string().required(),
-        UserEmail:  Joi.string().email().required(),
+        UserEmail: Joi.string().email().required(),
         UserNickname: Joi.string().required()
     };
     return schema;

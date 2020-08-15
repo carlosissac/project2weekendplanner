@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(logger);
 app.use('/api/user', require('./routes/api/user'));
 app.use('/api/event', require('./routes/api/event'));
+app.use('/api/schedule', require('./routes/api/schedule'));
 app.use(pages);
 
 db

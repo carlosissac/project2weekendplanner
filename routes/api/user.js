@@ -11,10 +11,10 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:UserID', (req, res) => {
+router.get('/single/:UserID', (req, res) => {
     const { error } = Joi.validate(req.params, sch.getSingleMethod());
     if(error) {
-        res.status(400).send(error);
+        res.status(400).send('UserID Invalid');
         return;
     } else {
         db.User.findOne({
@@ -22,11 +22,36 @@ router.get('/:UserID', (req, res) => {
             where: { UserID: req.params.UserID }
         }).then(ret => {
             if(!ret) {
-                res.status(404).send('Update unsuccessful - No change in updated field or Record Not Found');
+                res.status(404).send('User Not Found');
                 return;
             } else {
                 const msg = {
                     'msg': 'User Found',
+                    'user': ret
+                };
+                res.json(msg);
+                return;
+            }
+        });
+    }
+});
+
+router.get('/email/:UserEmail', (req, res) => {
+    const { error } = Joi.validate(req.params, sch.getEmailMethod());
+    if(error) {
+        res.status(400).send('UserEmail Invalid');
+        return;
+    } else {
+        db.User.findOne({
+            raw: true,
+            where: { UserEmail: req.params.UserEmail }
+        }).then(ret => {
+            if(!ret) {
+                res.status(404).send('Email Not Found');
+                return;
+            } else {
+                const msg = {
+                    'msg': 'Email Found',
                     'user': ret
                 };
                 res.json(msg);

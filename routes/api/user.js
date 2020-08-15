@@ -3,14 +3,16 @@ const { UserJoiSchema } = require('../../helper/joi/user');
 const express = require('express');
 const router = express.Router();
 let db = require('../../models');
-sch = new UserJoiSchema();
+const sch = new UserJoiSchema();
 
+//FIND ALL USERS
 router.get('/', (req, res) => {
     db.User.findAll({raw: true}).then(ret => {
         res.json(ret);
     });
 });
 
+//FIND ONE USER
 router.get('/:UserID', (req, res) => {
     const { error } = Joi.validate(req.params, sch.getSingleMethod());
     if(error) {
@@ -36,6 +38,7 @@ router.get('/:UserID', (req, res) => {
     }
 });
 
+//POST NEW USER
 router.post('/', (req, res) => {
     const { error } = Joi.validate(req.body, sch.postMethod());
     if(error) {
@@ -61,6 +64,7 @@ router.post('/', (req, res) => {
     }
 });
 
+//UPDATE USER
 router.put('/:UserID', (req, res) => {
     const { error } = Joi.validate(req.params, sch.putMethod());
     if(error) {
@@ -88,6 +92,7 @@ router.put('/:UserID', (req, res) => {
     }
 });
 
+//DELETE USER
 router.delete('/:UserID', (req, res) => {
     const { error } = Joi.validate(req.params, sch.deleteMethod());
     if(error) {

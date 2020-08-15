@@ -1,43 +1,34 @@
 const Joi = require('joi');
-const { EventJoiSchema } = require('../../helper/joi/event');
+const { ScheduleJoiSchema } = require('../../helper/joi/schedule');
 const express = require('express');
 const router = express.Router();
 let db = require('../../models');
-const sch = new EventJoiSchema();
+const sch = new ScheduleJoiSchema();
 
-//FIND ALL EVENTS
 router.get('/', (req, res) => {
-    db.Event.findAll({raw: true}).then(ret => {
+    db.Schedule.findAll({raw: true}).then(ret => {
         console.log(ret);
         res.json(ret);
     });
 });
 
-//ADD AN EVENT
 router.post('/', (req, res) => {
     const { error } = Joi.validate(req.body, sch.postMethod());
     if(error) {
         res.status(400).send(error.details[0].message);
         return;
     } else {
-        db.Event.create({
+        db.Schedule.create({
             raw: true,
-            EventName: req.body.EventName,
-            EventPlace: req.body.EventPlace,
-            EventType: req.body.EventType,
-            EventOrganizer: req.body.EventOrganizer,
-            EventTimeStart: req.body.EventTimeStart,
-            EventTimeEnd: req.body.EventTimeEnd
+            UserID: req.body.UserID,
+            EventID: req.body.EventID,
+            ScheduleNote: req.body.ScheduleNote
         }).then(ret => {
             const msg = {
                 'msg': 'Post Successful',
-                'EventID': ret.dataValues.EventName,
-                'EventName': req.body.EventName,
-                'EventPlace': req.body.EventPlace,
-                'EventType': req.body.EventType,
-                'EventOrganizer': req.body.EventOrganizer,
-                'EventTimeStart': req.body.EventTimeStart,
-                'EventTimeEnd': req.body.EventTimeEnd
+                'UserID': ret.dataValues.UserID,
+                'EventID': ret.dataValues.EventID,
+                'ScheduleNote': req.body.ScheduleNote
             };
             res.json(msg);
             return;
@@ -45,16 +36,16 @@ router.post('/', (req, res) => {
     }
 });
 
-router.put('/:EventID', (req, res) => {
+router.put('/:ScheduleID', (req, res) => {
     const { error } = Joi.validate(req.params, sch.putMethod());
     if(error) {
         res.status(400).send(error);
         return;
     } else {
-        db.Event.update(
+        db.Schedule.update(
             req.body, {
                 raw: true,
-                where: { EventID: req.params.EventID }
+                where: { ScheduleID: req.params.EventID }
             }).then(ret => {
             if(!Number(ret)) {
                 res.status(404).send('Update unsuccessful - No change in updated field or Record Not Found');
@@ -62,7 +53,7 @@ router.put('/:EventID', (req, res) => {
             } else {
                 const msg = {
                     'msg': 'Update Successful',
-                    'EventID': req.params.EventID,
+                    'ScheduleID': req.params.ScheduleID,
                     'body': req.body
                 };
                 res.json(msg);
@@ -72,14 +63,14 @@ router.put('/:EventID', (req, res) => {
     }
 });
 
-router.delete('/:EventID', (req, res) => {
+router.delete('/:ScheduleID', (req, res) => {
     const { error } = Joi.validate(req.params, sch.deleteMethod());
     if(error) {
         res.status(400).send(error);
         return;
     } else {
-        db.Event.destroy({
-            where: { EventID: req.params.UserID }
+        db.Schedule.destroy({
+            where: { ScheduleID: req.params.UserID }
         }).then(ret => {
             if(!Number(ret)) {
                 res.status(404).send('Delete unsuccessful - Record Not Found');
@@ -87,7 +78,7 @@ router.delete('/:EventID', (req, res) => {
             } else {
                 const msg = {
                     'msg': 'Delete Successful',
-                    'EventID': req.params.EventID
+                    'ScheduleID': req.params.ScheduleID
                 };
                 res.json(msg);
                 return;

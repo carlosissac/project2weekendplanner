@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER(11),
             allowNull: false
         },*/
-        /*EventID: {
+        EventID: {
             type: DataTypes.INTEGER(11),
             allowNull: false
-        },*/
+        },
         ScheduleNote: {
             type: DataTypes.STRING(300),
             allowNull: false

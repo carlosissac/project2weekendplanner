@@ -26,7 +26,7 @@ router.get('/single/:ScheduleID', (req, res) => {
                 return;
             } else {
                 const msg = {
-                    'msg': 'User Found',
+                    'msg': 'Schedule Found',
                     'Schedule': ret
                 };
                 res.json(msg);

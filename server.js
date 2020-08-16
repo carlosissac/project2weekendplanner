@@ -4,6 +4,7 @@ const pages = require('./routes/public/pages');
 const user = require('./routes/api/user');
 const event = require('./routes/api/event');
 const schedule = require('./routes/api/schedule');
+const scrape = require('./routes/api/scrape');
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -18,19 +19,9 @@ app.use(logger);
 app.use('/api/user', user);
 app.use('/api/event', event);
 app.use('/api/schedule', schedule);
-
-
+app.use('/api/scrape', scrape);
 app.use(pages);
 
-//HEROKKU VERSION
-/*db.sequelize.sync({force:true}).then(function(){
-  app.listen(PORT, function(){
-    console.log("Listening on port %s", PORT);
-  });
-});*/
-
-
-//DEV VERSIOM
 db
     .sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true })
     .then(() => {
@@ -39,6 +30,7 @@ db
             .then(() => {
                 app.listen(PORT, () => {
                     console.log(`App listening on: http://localhost:${PORT}`);
+                    //initial mercury load
                 });
             });
     });

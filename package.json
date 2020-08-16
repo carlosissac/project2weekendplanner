@@ -8,7 +8,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint \"./**/*.js\"",
         "start": "node server",
-        "dev": "nodemon server"
+        "dev": "nodemon server --ignore 'helper/mercury/pageload.json'"
     },
     "keywords": [],
     "author": "",
@@ -18,12 +18,15 @@
         "dotenv": "^8.2.0",
         "eslint": "^7.6.0",
         "express": "^4.16.3",
+        "fs": "0.0.1-security",
         "joi": "^13.1.0",
         "moment": "^2.27.0",
         "mysql2": "^1.6.4",
+        "path": "^0.12.7",
         "request": "^2.88.2",
         "sequelize": "^4.41.2",
-        "tailwindcss": "^1.6.2"
+        "tailwindcss": "^1.6.2",
+        "util": "^0.12.3"
     },
     "devDependencies": {
         "nodemon": "^2.0.4"

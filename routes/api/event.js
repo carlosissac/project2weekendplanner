@@ -5,7 +5,6 @@ const router = new express.Router();
 let db = require('../../models');
 const sch = new EventJoiSchema();
 
-//FIND ALL EVENTS
 router.get('/', (req, res) => {
     db.Event.findAll({raw: true}).then(ret => {
         res.json(ret);
@@ -28,7 +27,7 @@ router.get('/single/:EventID', (req, res) => {
             } else {
                 const msg = {
                     'msg': 'Event Found',
-                    'user': ret
+                    'Event': ret
                 };
                 res.json(msg);
                 return;
@@ -101,7 +100,7 @@ router.delete('/:EventID', (req, res) => {
         return;
     } else {
         db.Event.destroy({
-            where: { EventID: req.params.UserID }
+            where: { EventID: req.params.EventID }
         }).then(ret => {
             if(!Number(ret)) {
                 res.status(404).send('Delete unsuccessful - Record Not Found');

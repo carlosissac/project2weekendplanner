@@ -3,7 +3,6 @@ const path = require('path');
 const { Writer } = require('../../helper/writer/writer');
 const { Scrape } = require('../../helper/cheerio/scrape');
 
-
 const plipath = path.join(__dirname, '../../helper/mercury', '/pageload.json');
 const spath = path.join(__dirname, '../../helper/mercury', '/safety.json');
 //let count = 0;

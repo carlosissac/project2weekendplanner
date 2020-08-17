@@ -21,7 +21,6 @@ $(document).ready(() => {
 
         getClosestWeekendDate: function() {
             //for initial State
-            
             return 0;
         },
 

@@ -1,7 +1,6 @@
 const request = require('request');
 const cheerio = require('cheerio');
-//const { promisify } = require('util');
-//const req = promisify(request);
+let db = require('../../models');
 
 const Scrape = function() {
     this.ID = 'portlandMercuryScrape';
@@ -10,6 +9,38 @@ const Scrape = function() {
     this.EventDate = [];
     this.EventTimeStart = [];
     this.EventPlace = [];
+};
+
+Scrape.prototype.storeDB = async function(array) {
+    await array.forEach(async body => {
+        db.Event.create({
+            raw: true,
+            EventCategory: body.EventCategory,
+            EventName: body.EventName,
+            EventDate: body.EventDate,
+            EventTimeStart: body.EventTimeStart,
+            EventTimeEnd: '',
+            EventPlace: body.EventPlace
+        });
+    });
+};
+
+Scrape.prototype.createBody = async function() {
+    let i = 0;
+    const array = [];
+    this.EventCategory.forEach(async ec => {
+        body = {
+            'EventCategory': ec,
+            'EventName': this.EventName[i],
+            'EventDate': this.EventDate[i],
+            'EventTimeStart': this.EventTimeStart[i],
+            'EventTimeEnd': '',
+            'EventPlace': this.EventPlace[i]
+        };
+        i++;
+        array.push(body);
+    });
+    await this.storeDB(array);
 };
 
 Scrape.prototype.cleanArray = function() {
@@ -58,7 +89,9 @@ Scrape.prototype.scrapePage = async function(pageNumber) {
                 this.EventPlace[i] = $(el).find('.location-name').text().replace(/\s\s+/g, '');
             });
             //console.log(this.EventPlace);
-            console.log(this.EventPlace.length);
+            //console.log(this.EventPlace.length);
+
+            this.createBody();
         }
     });
 };

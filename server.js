@@ -5,6 +5,8 @@ const user = require('./routes/api/user');
 const event = require('./routes/api/event');
 const schedule = require('./routes/api/schedule');
 const scrape = require('./routes/api/scrape');
+const task = require('./helper/cron/job');
+
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -22,15 +24,16 @@ app.use('/api/schedule', schedule);
 app.use('/api/scrape', scrape);
 app.use(pages);
 
+task.start();
+
 db
     .sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { raw: true })
     .then(() => {
         db
-            .sequelize.sync({ force: false })
+            .sequelize.sync({ force: false })//false
             .then(() => {
                 app.listen(PORT, () => {
                     console.log(`App listening on: http://localhost:${PORT}`);
-                    //initial mercury load
                 });
             });
     });

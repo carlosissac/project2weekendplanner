@@ -6,7 +6,19 @@ let db = require('../../models');
 const sch = new ScheduleJoiSchema();
 
 router.get('/', (req, res) => {
-    db.Schedule.findAll({raw: true}).then(ret => {
+    db.Schedule.findAll({
+        raw: true,
+        include: [{
+            model: db.User,
+            as: 'User',
+            attributes: ['UserName', 'UserEmail', 'UserNickname']
+        },{
+            model: db.Event,
+            as: 'Event',
+            attributes: ['EventCategory', 'EventName', 'EventDate', 'EventTimeStart', 'EventPlace']
+        }],
+        attributes: ['ScheduleID', 'EventID', 'UserID', 'ScheduleNote', 'ScheduleOutdated']
+    }).then(ret => {
         res.json(ret);
     });
 });
@@ -19,7 +31,17 @@ router.get('/single/:ScheduleID', (req, res) => {
     } else {
         db.Schedule.findOne({
             raw: true,
-            where: { ScheduleID: req.params.ScheduleID }
+            where: { ScheduleID: req.params.ScheduleID },
+            include: [{
+                model: db.User,
+                as: 'User',
+                attributes: ['UserName', 'UserEmail', 'UserNickname']
+            },{
+                model: db.Event,
+                as: 'Event',
+                attributes: ['EventCategory', 'EventName', 'EventDate', 'EventTimeStart', 'EventPlace']
+            }],
+            attributes: ['ScheduleID', 'EventID', 'UserID', 'ScheduleNote', 'ScheduleOutdated']
         }).then(ret => {
             if(!ret) {
                 res.status(404).send('Schedule Not Found');

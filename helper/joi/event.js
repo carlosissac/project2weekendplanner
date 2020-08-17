@@ -15,6 +15,13 @@ EventJoiSchema.prototype.getSingleEventMethod = function() {
     return schema;
 };
 
+EventJoiSchema.prototype.getEventDateMethod = function() {
+    const schema = {
+        EventDate: Joi.string().required()
+    };
+    return schema;
+};
+
 EventJoiSchema.prototype.postEventMethod = function() {
     const schema = {
         EventCategory: Joi.string().required(),

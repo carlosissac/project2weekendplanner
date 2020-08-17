@@ -18,8 +18,8 @@ router.post('/dbload', async (req, res) => {
     const plipath = path.join(__dirname, '../../helper/mercury', '/pageload.json');
     let writer = new Writer();
     let scrape = new Scrape();
-    let i = 0;
-    for(i=0; i<20; i++) {
+    let i = 1;
+    for(i=1; i<21; i++) {
         await Promise.all([scrape.scrapePage(i)]);
     }
     writer.fileClear(plipath);
@@ -35,6 +35,19 @@ router.post('/dbload/:PLIndex', async (req, res) => {
     writer.fileClear(plipath);
     writer.fileAppend(plipath, String(req.params.PLIndex), 'DBLOAD');
     res.json(String(req.params.PLIndex));
+});
+
+router.post('/loadsingle', async (req, res) => {
+    const plipath = path.join(__dirname, '../../helper/mercury', '/pageload.json');
+    let writer = new Writer();
+    let scrape = new Scrape();
+    let pli = await writer.readFile(plipath);
+    let inc = Number(pli);
+    inc++;
+    await writer.fileClear(plipath);
+    await writer.fileAppend(plipath, String(inc), 'POST Single');
+    await Promise.all([scrape.scrapePage(inc)]);
+    res.json(String(inc));
 });
 
 router.put('/plindex/:PLIndex', async (req, res) => {

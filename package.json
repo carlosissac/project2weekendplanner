@@ -8,7 +8,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint \"./**/*.js\"",
         "start": "node server",
-        "dev": "nodemon server --ignore 'helper/mercury/pageload.json'"
+        "dev": "nodemon server --ignore './helper/mercury/' "
     },
     "keywords": [],
     "author": "",

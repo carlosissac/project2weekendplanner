@@ -50,6 +50,24 @@ router.post('/loadsingle', async (req, res) => {
     res.json(String(inc));
 });
 
+router.post('/safety', async (req, res) => {
+    const spath = path.join(__dirname, '../../helper/mercury', '/safety.json');
+    console.log(spath);
+    let writer = new Writer();
+    let safetyInc = await writer.readFile(spath);
+    let safetyOut = 0;
+    if(safetyInc === '0'){
+        safetyOut = 1; /// SAFETY ENABLED, NO SCRAPING
+    }
+    if(safetyInc === '1') {
+        safetyOut = 0; ///SAFETY DISABLED, SCRAPING ON
+    }
+    writer.fileClear(spath);
+    writer.fileAppend(spath, String(safetyOut), 'SAFETY');
+    res.json(String(safetyOut));
+});
+
+
 router.put('/plindex/:PLIndex', async (req, res) => {
     const plipath = path.join(__dirname, '../../helper/mercury', '/pageload.json');
     let writer = new Writer();

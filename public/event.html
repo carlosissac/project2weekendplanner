@@ -62,7 +62,7 @@
         /* Icon formatting - open */
         .tab input[type=checkbox]:checked + label::after {
         transform: rotate(315deg);
-        background-color: #6574cd; /*.bg-indigo*/
+        background-color: gray; 
         color: #f8fafc; /*.text-grey-lightest*/
         }
         .tab input[type=radio]:checked + label::after {
@@ -88,12 +88,14 @@
             
     </nav>
     <!-- HTML FOR ALL OF THE EVENTS, mock events for now!! -->
-    <div class="container mx-auto mt-4 px-32">
+    <div class="container mx-auto mt-4 px-50">
         <div class="text-center sm:text-left">
-            <div class="grid grid-cols-2 gap-20 border-black">
+            <div class="grid grid-cols-2 gap-20 border-black ">
                 <div class="shadow p-4 bg-white">
                     <div class="text-left">
-                        <h3 class="mb-2 text-gray-700">EVENTS</h3>
+                        <h3 class="mb-2 text-gray-700">EVENTS</h3> 
+                        <!-- Time.format on Events card -->
+                         <h6 id="day-less" style="display:inline;"><i id="btn-left" class="fas fa-caret-square-left"></i>&nbsp;&nbsp;</h6><h6 id="display-day" style="display:inline;"> Day/Month/Year </h6><h6 id="day-more" style="display:inline;">&nbsp;&nbsp;<i id="btn-right" class="fas fa-caret-square-right"></i>&nbsp;&nbsp;</h6><h6 id="time-format-lbl" style="display:inline;"> Time.Format </h6>
                         <p class="text-grey-600 text-sm">
                         <div class="shadow-md">
                             <div class="tab w-full overflow-hidden border-t">
@@ -101,7 +103,8 @@
                                <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-one-a">Label One</label>
                                <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
                                   <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
-                                  <button class="bg-blue-500 hover:bg-gray-500 text-white font-bold py-1 px-4 mb-5 ml-5 rounded" id=button>Details</button>
+                                  <div><button class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-1 px-4 mb-5 ml-5 rounded" id=button>Details</button>
+                                    </div>
                                </div>
                             </div>
                             <div class="tab w-full overflow-hidden border-t">
@@ -163,7 +166,8 @@
             <input type="text" placeholder="Event Name">
             <input type="text" placeholder="Event Date">
             <p class="p-5"> ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
-            <button id="button-m"class="bg-blue-500 hover:bg-gray-500 text-white font-bold py-2 px-5 ml-15 rounded">Add Event</button>
+            <div class="text p-5"><textarea class="text-area px-10 py-5">hello world</textarea></div>
+            <div class="button-m2 p-5"><button id="button-m"class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-5 ml-15 rounded p-5">Add Event</button></div>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery.js"></script>

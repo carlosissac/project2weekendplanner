@@ -8,28 +8,28 @@
     <!-- CSS LINKAGE -->
     <link rel="stylesheet" href="./css/style.css">
     <title> Weekend Planner</title>
-    
+
 </head>
 
 <body class="bg-no-repeat ..." style="background-image: url('https://i.pinimg.com/originals/52/9a/e1/529ae19bbb846c5339921588809021d5.jpg')">
-    <!-- navbar, will differ on each page  -->
-    <nav class="flex items-center justify-between flex-wrap bg-green-900 p-6">
-        <div class="flex items-center flex-shrink-0 text-white ml-24 mr-6">
-            <span class="font-bold text-3xl"> Weekend Planner </span>
+    <!-- navbar -->
+    <nav class="flex items-center justify-between flex-wrap bg-teal-900 p-6">
+        <div class="flex items-center flex-shrink-0 text-white ml-24 mr-6 shadow-2xl">
+            <span class="font-bold text-3xl"> Weekend Planner : Log In</span>
         </div>
     </nav>
     <!-- MAIN PAGE, login or register from here  -->
     <div class="container mx-auto mt-8 px-32 ">
         <div class="text-center sm:text-left">
-            <p class="text-center text-3xl">Welcome</p>
+            <p class="text-center font-bold text-3xl">WELCOME</p>
             <form class="flex flex-col pt-3 md:pt-8" onsubmit="event.preventDefault();">
                 <div class="flex flex-col pt-4">
-                    <label for="email" id="login-textbox-label" class="text-lg">Email</label>
-                    <input type="email " id="login-textbox" placeholder="you@email.com " class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline ">
+                    <!-- <label for="email" id="login-textbox-label" class="text-lg">Email</label> -->
+                    <input type="email " id="login-textbox" placeholder="email: you@email.com " class="shadow appearance-none border rounded w-full py-2 px-3 font-bold text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline ">
                 </div>
                 <input type="submit" id="login-btn" value="Log In" style="text-align: center;" class="bg-black text-white font-bold text-lg hover:bg-gray-700 p-2 mt-8">
             </form>
-            <div class="text-center pt-12 pb-12 ">
+            <div class="text-center pt-12 pb-12 text-blue-100 font-bold text-xl">
                 <p>Don't have an account? <a href="/register" class="underline font-semibold ">Register here.</a></p>
             </div>
         </div>
@@ -37,4 +37,5 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="./js/index.js"></script>
 </body>
+
 </html>

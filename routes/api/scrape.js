@@ -50,6 +50,25 @@ router.post('/loadsingle', async (req, res) => {
     res.json(String(inc));
 });
 
+router.post('/safety', async (req, res) => {
+    const spath = path.join(__dirname, '../../helper/mercury', '/safety.json');
+    console.log(spath);
+    let writer = new Writer();
+    let safetyInc = await writer.readFile(spath);
+    let safetyOut = 0;
+    if(safetyInc === '0'){
+        safetyOut = 1; /// SAFETY ENABLED, NO SCRAPING
+    }
+    if(safetyInc === '1') {
+        safetyOut = 0; ///SAFETY DISABLED, SCRAPING ON
+    }
+    console.log(safetyOut);
+    await writer.fileClear(spath);
+    await writer.fileAppend(spath, String(safetyOut), 'SAFETY');
+    res.json(String(safetyOut));
+});
+
+
 router.put('/plindex/:PLIndex', async (req, res) => {
     const plipath = path.join(__dirname, '../../helper/mercury', '/pageload.json');
     let writer = new Writer();
@@ -58,8 +77,9 @@ router.put('/plindex/:PLIndex', async (req, res) => {
         res.status(400).send(error);
         return;
     } else {
-        writer.fileClear(plipath);
-        writer.fileAppend(plipath, req.params.PLIndex, 'PUT');
+        console.log(Number(req.params.PLIndex));
+        await writer.fileClear(plipath);
+        await writer.fileAppend(plipath, req.params.PLIndex, 'PUT');
         res.json(req.params.PLIndex);
     }
 });
@@ -67,8 +87,9 @@ router.put('/plindex/:PLIndex', async (req, res) => {
 router.delete('/plindex', async (req, res) => {
     const plipath = path.join(__dirname, '../../helper/mercury', '/pageload.json');
     let writer = new Writer();
-    writer.fileClear(plipath);
-    writer.fileAppend(plipath, String(0), 'PUT');
+    await writer.fileClear(plipath);
+    console.log(0);
+    await writer.fileAppend(plipath, String(0), 'PUT');
     res.json(0);
 });
 

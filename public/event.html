@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekend Planner</title>
+    <!-- CSS LINKAGE -->
+    <link rel="stylesheet" href="./css/style.css">
+    <title> Weekend Planner</title>
+    <style>
+        /* Tab content - closed */
+        
+        .tab-content {
+            max-height: 0;
+            -webkit-transition: max-height .35s;
+            -o-transition: max-height .35s;
+            transition: max-height .35s;
+        }
+        /* :checked - resize to full height */
+        
+        .tab input:checked~.tab-content {
+            max-height: 100vh;
+        }
+        /* Label formatting when open */
+        
+        - .tab input:checked+label {
+            /*@apply text-xl p-5 border-l-2 border-indigo-500 bg-gray-100 text-indigo*/
+            font-size: 1.25rem;
+            /*.text-xl*/
+            padding: 1.25rem;
+            /*.p-5*/
+            border-left-width: 2px;
+            /*.border-l-2*/
+            border-color: #6574cd;
+            /*.border-indigo*/
+            background-color: #f8fafc;
+            /*.bg-gray-100 */
+            color: #6574cd;
+            /*.text-indigo*/
+        }
+        /* Icon */
+        
+        .tab label::after {
+            float: right;
+            right: 0;
+            top: 0;
+            display: block;
+            width: 1.5em;
+            height: 1.5em;
+            line-height: 1.5;
+            font-size: 1.25rem;
+            text-align: center;
+            -webkit-transition: all .35s;
+            -o-transition: all .35s;
+            transition: all .35s;
+        }
+        /* Icon formatting - closed */
+        
+        .tab input[type=checkbox]+label::after {
+            content: "+";
+            font-weight: bold;
+            /*.font-bold*/
+            border-width: 1px;
+            /*.border*/
+            border-radius: 9999px;
+            /*.rounded-full */
+            border-color: #b8c2cc;
+            /*.border-grey*/
+        }
+        
+        .tab input[type=radio]+label::after {
+            content: "\25BE";
+            font-weight: bold;
+            /*.font-bold*/
+            border-width: 1px;
+            /*.border*/
+            border-radius: 9999px;
+            /*.rounded-full */
+            border-color: #b8c2cc;
+            /*.border-grey*/
+        }
+        /* Icon formatting - open */
+        
+        .tab input[type=checkbox]:checked+label::after {
+            transform: rotate(315deg);
+            background-color: teal;
+            /*.bg-indigo*/
+            color: #f8fafc;
+            /*.text-grey-lightest*/
+        }
+        
+        .tab input[type=radio]:checked+label::after {
+            transform: rotateX(180deg);
+            background-color: teal;
+            /*.bg-indigo*/
+            color: #f8fafc;
+            /*.text-grey-lightest*/
+        }
+    </style>
+</head>
+
+<body class="bg-no-repeat ..." style="background-image: url(https://images.unsplash.com/photo-1582203410996-f2af25fb9776?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80)">
+    <!-- navbar, this gets the modal over it -->
+    <nav class="flex items-center justify-between flex-wrap bg-teal-900 p-6">
+        <div class="flex items-right flex-shrink-0 text-white ml-24 mr-2">
+            <span class="font-bold text-3xl"> Weekend Planner : Events </span>
+        </div>
+        <ul class="nav items w-full block flex-grow sm:flex sm:items-center sm:w-auto ">
+            <li class="w-full block flex-grow sm:flex sm:items-center sm:w-auto ">
+                <div class=" text-sm sm:flex-grow ">
+                    <a href="schedule.html " class="block mt-2 sm:inline-block sm :mt -0 text -grey -200 text-2xl hover: text-white mr-10 "></div>
+                SCHEDULE
+                </a>
+            </li>
+
+    </nav>
+    <!-- HTML FOR ALL OF THE EVENTS, mock events for now!! -->
+    <div class="container flex mx-auto mt-4 px-32">
+        <div class="text-center sm:text-left">
+            <div class="grid grid-cols-2 gap-24 border-black">
+                <div class="shadow p-4 bg-white">
+                    <div class="text-left">
+                        <h3 class="mb-2 text-gray-700 font-bold">EVENTS</h3>
+                        <p class="text-grey-600 text-sm">
+                            <div class="shadow-md">
+                                <div class="tab w-full overflow-hidden border-t">
+                                    <input class="absolute opacity-0 " id="tab-multi-one-a" type="checkbox" name="tabs">
+                                    <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-one-a">Label One</label>
+                                    <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                                        <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci
+                                            eum? Saepe, itaque.</p>
+                                        <button class="bg-blue-500 hover:bg-gray-500 text-white font-bold py-1 px-4 mb-5 ml-5 rounded" id=button>Details</button>
+                                    </div>
+                                </div>
+                                <div class="tab w-full overflow-hidden border-t">
+                                    <input class="absolute opacity-0" id="tab-multi-two-a" type="checkbox" name="tabs">
+                                    <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-two-a">Label Two</label>
+                                    <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                                        <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci
+                                            eum? Saepe, itaque.</p>
+                                    </div>
+                                </div>
+                                <div class="tab w-full overflow-hidden border-t">
+                                    <input class="absolute opacity-0" id="tab-multi-three-a" type="checkbox" name="tabs">
+                                    <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-three-a">Label Three</label>
+                                    <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                                        <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci
+                                            eum? Saepe, itaque.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="shadow p-4 bg-white">
+                    <div class="text-left">
+                        <h3 class="mb-2 text-gray-700 font-bold">WEEKEND SCHEDULE</h3>
+                        <p class="text-grey-600 text-sm">
+                            <div class="shadow-md">
+                                <div class="tab w-full overflow-hidden border-t">
+                                    <input class="absolute opacity-0 " id="tab-multi-one-b" type="checkbox" name="tabs">
+                                    <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-one-b">Label One</label>
+                                    <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                                        <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci
+                                            eum? Saepe, itaque.</p>
+                                    </div>
+                                </div>
+                                <div class="tab w-full overflow-hidden border-t">
+                                    <input class="absolute opacity-0" id="tab-multi-two-b" type="checkbox" name="tabs">
+                                    <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-two-b">Label Two</label>
+                                    <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                                        <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci
+                                            eum? Saepe, itaque.</p>
+                                    </div>
+                                </div>
+                                <div class="tab w-full overflow-hidden border-t">
+                                    <input class="absolute opacity-0" id="tab-multi-three-b" type="checkbox" name="tabs">
+                                    <label class="block p-5 leading-normal cursor-pointer" for="tab-multi-three-b">Label Three</label>
+                                    <div class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal">
+                                        <p class="p-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci
+                                            eum? Saepe, itaque.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal Section-->
+    <div class="bg-modal">
+        <div class="modal-content">
+            <div class="close">+</div>
+            <form action="">
+                <input type="text" placeholder="Event Name">
+                <input type="text" placeholder="Event Date">
+                <p class="p-5"> ipsum dolor sit amet, consectetur adipisicing elit. Tenetur, architecto, explicabo perferendis nostrum, maxime impedit atque odit sunt pariatur illo obcaecati soluta molestias iure facere dolorum adipisci eum? Saepe, itaque.</p>
+                <button id="button-m" class="bg-blue-500 hover:bg-gray-500 text-white font-bold py-2 px-5 ml-15 rounded">Add Event</button>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="./js/event.js"></script>
+</body>
+
+</html>

@@ -10,16 +10,16 @@ var config = require(__dirname + '/../config/config.json')[env];
 var db = {};
 
 ///DEV VERSION
-var sequelize = '';
+/*var sequelize = '';
 if (config.use_env_variable) {
     sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
     sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+}*/
 ///HEROKKU VERSION
-/*config.host = process.env.HOST;
+config.host = process.env.HOST;
 config.database = process.env.DATABASE;
-const sequelize = new Sequelize(process.env.DATABASE, process.env.USERNAME, process.env.SQLPASS, config);*/
+const sequelize = new Sequelize(process.env.DATABASE, process.env.USERNAME, process.env.SQLPASS, config);
 
 fs
     .readdirSync(__dirname)

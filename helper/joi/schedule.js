@@ -8,29 +8,30 @@ ScheduleJoiSchema.prototype.getID = function() {
     return this.type;
 };
 
-ScheduleJoiSchema.prototype.getSingleMethod = function() {
+ScheduleJoiSchema.prototype.getSingleScheduleMethod = function() {
     const schema = {
         ScheduleID: Joi.string().trim().regex(/^[0-9]+$/).required()
     };
     return schema;
 };
 
-ScheduleJoiSchema.prototype.postMethod = function() {
+ScheduleJoiSchema.prototype.postScheduleMethod = function() {
     const schema = {
-        ScheduleNote: Joi.string().required(),
-        ScheduleOutdated:  Joi.string().required()
+        UserID: Joi.string().required(),
+        EventID: Joi.string().required(),
+        ScheduleNote: Joi.string().required()
     };
     return schema;
 };
 
-ScheduleJoiSchema.prototype.putMethod = function() {
+ScheduleJoiSchema.prototype.putScheduleMethod = function() {
     const schema = {
         ScheduleID: Joi.string().trim().regex(/^[0-9]+$/).required()
     };
     return schema;
 };
 
-ScheduleJoiSchema.prototype.deleteMethod = function() {
+ScheduleJoiSchema.prototype.deleteScheduleMethod = function() {
     const schema = {
         ScheduleID: Joi.string().trim().regex(/^[0-9]+$/).required()
     };

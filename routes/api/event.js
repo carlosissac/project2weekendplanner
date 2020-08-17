@@ -5,7 +5,6 @@ const router = new express.Router();
 let db = require('../../models');
 const sch = new EventJoiSchema();
 
-//FIND ALL EVENTS
 router.get('/', (req, res) => {
     db.Event.findAll({raw: true}).then(ret => {
         res.json(ret);
@@ -28,7 +27,34 @@ router.get('/single/:EventID', (req, res) => {
             } else {
                 const msg = {
                     'msg': 'Event Found',
-                    'user': ret
+                    'Event': ret
+                };
+                res.json(msg);
+                return;
+            }
+        });
+    }
+});
+
+router.get('/date/:EventDate', (req, res) => {
+    const { error } = Joi.validate(req.params, sch.getEventDateMethod());
+    console.log(`${req.params.EventDate}`);
+    if(error) {
+        res.status(400).send('EventDate Invalid');
+        return;
+    } else {
+        db.Event.findAll({
+            raw: true,
+            where: { EventDate: req.params.EventDate },
+            attributes: ['EventCategory', 'EventName', 'EventDate', 'EventTimeStart', 'EventTimeEnd', 'EventPlace']
+        }).then(ret => {
+            if(!ret) {
+                res.status(404).send('Event Not Found');
+                return;
+            } else {
+                const msg = {
+                    'msg': 'EventDate Found',
+                    'Event': ret
                 };
                 res.json(msg);
                 return;
@@ -59,7 +85,7 @@ router.post('/', (req, res) => {
                 'EventDate': req.body.EventDate,
                 'EventTimeStart': req.body.EventTimeStart,
                 'EventTimeEnd': req.body.EventTimeEnd,
-                'EventPlace': req.body.EventPlace,
+                'EventPlace': req.body.EventPlace
             };
             res.json(msg);
             return;
@@ -101,7 +127,7 @@ router.delete('/:EventID', (req, res) => {
         return;
     } else {
         db.Event.destroy({
-            where: { EventID: req.params.UserID }
+            where: { EventID: req.params.EventID }
         }).then(ret => {
             if(!Number(ret)) {
                 res.status(404).send('Delete unsuccessful - Record Not Found');

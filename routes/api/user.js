@@ -5,7 +5,6 @@ const router = new express.Router();
 let db = require('../../models');
 const sch = new UserJoiSchema();
 
-//FIND ALL USERS
 router.get('/', (req, res) => {
     db.User.findAll({raw: true}).then(ret => {
         res.json(ret);
@@ -28,7 +27,7 @@ router.get('/single/:UserID', (req, res) => {
             } else {
                 const msg = {
                     'msg': 'User Found',
-                    'user': ret
+                    'User': ret
                 };
                 res.json(msg);
                 return;
@@ -87,7 +86,6 @@ router.post('/', (req, res) => {
     }
 });
 
-//UPDATE USER
 router.put('/:UserID', (req, res) => {
     const { error } = Joi.validate(req.params, sch.putUserMethod());
     if(error) {
@@ -115,7 +113,6 @@ router.put('/:UserID', (req, res) => {
     }
 });
 
-//DELETE USER
 router.delete('/:UserID', (req, res) => {
     const { error } = Joi.validate(req.params, sch.deleteUserMethod());
     if(error) {

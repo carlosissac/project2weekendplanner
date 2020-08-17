@@ -1,7 +1,6 @@
 $(document).ready(() => {
 
     const registerUser = (userInfo) => {
-        console.log(userInfo);
         return $.ajax({
             url: '/api/user',
             data: userInfo,

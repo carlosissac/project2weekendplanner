@@ -35,7 +35,7 @@ $(document).ready(() => {
                 this['fetchedEvents'] = await queryEventsByDate(date);
                 console.log(this['fetchedEvents']);
                 //window.location.href = '/event';
-            } catch(err) {
+            } catch (err) {
                 //$('#login-textbox-label').text(err.responseText);
                 //$('#login-textbox-label').css('color', 'red');
             }
@@ -52,4 +52,11 @@ $(document).ready(() => {
 
     initialState();
 
+});
+
+document.getElementById('button').addEventListener('click', function() {
+    document.querySelector('.bg-modal').style.display = 'flex';
+});
+document.querySelector('.close').addEventListener('click', function() {
+    document.querySelector('.bg-modal').style.display = 'none';
 });
